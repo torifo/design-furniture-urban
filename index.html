@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLOC — Furniture for Dense Living</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0A0A0A;
+      --white: #F5F5F3;
+      --accent: #E84C1B;
+      --border: #1E1E1E;
+      --border-l: #DCDCDA;
+      --mono: #888888;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+    html { scroll-behavior: smooth; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+    body { background: var(--black); color: var(--white); font-family: var(--font-body); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.12); }
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 10;
+      min-height: 68px;
+      padding: 1rem clamp(1rem, 4vw, 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      mix-blend-mode: difference;
+    }
+    .logo, h1, h2, .num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      letter-spacing: -.04em;
+      line-height: .82;
+      text-transform: uppercase;
+    }
+    .logo { font-size: 2rem; letter-spacing: -.02em; }
+    .nav-links { display: flex; gap: clamp(1rem, 3vw, 2.5rem); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; }
+    .hero-black {
+      min-height: 100svh;
+      padding: 7rem clamp(1rem, 4vw, 3rem) 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--black);
+      animation: fade .8s ease both;
+    }
+    h1 { font-size: clamp(6rem, 22vw, 22rem); }
+    .tagline {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      color: #b8b8b8;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      max-width: 1100px;
+    }
+    .scroll { color: var(--accent); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    .product-sec {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: clamp(2rem, 6vw, 6rem);
+      padding: 7rem clamp(1rem, 4vw, 3rem);
+      overflow: hidden;
+    }
+    .product-sec.dark { background: var(--black); color: var(--white); border-top: 1px solid var(--border); }
+    .product-sec.light { background: var(--white); color: var(--black); border-top: 1px solid var(--border-l); }
+    .num {
+      position: absolute;
+      right: -2vw;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(16rem, 36vw, 50rem);
+      opacity: .06;
+      pointer-events: none;
+      user-select: none;
+    }
+    .product-img { aspect-ratio: 4/3; border: 1px solid currentColor; overflow: hidden; background: #222; }
+    .product-copy { position: relative; z-index: 1; max-width: 560px; }
+    .kicker { color: var(--accent); font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 1rem; }
+    h2 { font-size: clamp(4.5rem, 12vw, 12rem); margin-bottom: 1.5rem; }
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: currentColor;
+      border: 1px solid currentColor;
+      margin: 2rem 0;
+    }
+    .meta div { background: inherit; padding: 1rem; }
+    .dark .meta div { background: var(--black); }
+    .light .meta div { background: var(--white); }
+    .meta b { display: block; font-size: .68rem; color: var(--mono); letter-spacing: .16em; text-transform: uppercase; margin-bottom: .25rem; }
+    .price { color: var(--accent); font-size: 1.3rem; font-weight: 500; }
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      padding: .8rem 1.2rem;
+      border: 1px solid currentColor;
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      transition: background-color .2s, color .2s;
+    }
+    .btn:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
+    .section { padding: 6rem clamp(1rem, 4vw, 3rem); background: var(--white); color: var(--black); }
+    .section h2 { font-size: clamp(4rem, 11vw, 10rem); }
+    .room-system {
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 1px;
+      background: var(--border-l);
+      border-block: 1px solid var(--border-l);
+    }
+    .room-copy {
+      background: var(--white);
+      color: var(--black);
+      padding: 6rem clamp(1rem, 4vw, 3rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 72svh;
+    }
+    .room-copy p { color: #5f5f5f; max-width: 30rem; }
+    .room-map {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-l);
+      min-height: 72svh;
+    }
+    .zone {
+      position: relative;
+      padding: 1rem;
+      background: #ECECEA;
+      color: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .zone:nth-child(1) { grid-row: span 2; background: #DBDBD8; }
+    .zone b {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 6rem);
+      line-height: .82;
+      text-transform: uppercase;
+      letter-spacing: -.04em;
+      position: relative;
+      z-index: 1;
+    }
+    .zone span {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #666;
+      position: relative;
+      z-index: 1;
+    }
+    .zone::after {
+      content: "";
+      position: absolute;
+      inset: auto 1rem 1rem auto;
+      width: 38%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(10,10,10,.18);
+      transform: rotate(45deg);
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      border: 1px solid var(--border-l);
+      margin-top: 2rem;
+      overflow-x: auto;
+    }
+    .cell { min-width: 160px; padding: 1rem; border-right: 1px solid var(--border-l); border-bottom: 1px solid var(--border-l); font-family: var(--font-body); }
+    .cell.head { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; text-transform: uppercase; }
+    .collection-mini {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border-l);
+      border-left: 0;
+      margin-top: 3rem;
+    }
+    .mini { border-left: 1px solid var(--border-l); padding: 1rem; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between; }
+    .mini b { font-family: var(--font-display); font-size: 2.8rem; line-height: .82; text-transform: uppercase; }
+    .cta-full {
+      min-height: 80svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem clamp(1rem, 4vw, 3rem);
+      background: var(--black);
+      color: var(--white);
+    }
+    .cta-full p { color: #999; max-width: 42rem; margin: 1.5rem 0 2rem; }
+    footer { padding: 1rem clamp(1rem, 4vw, 3rem); display: flex; justify-content: space-between; background: var(--black); color: #777; border-top: 1px solid var(--border); font-size: .8rem; }
+    .reveal { opacity: 0; transition: opacity .6s ease; }
+    .reveal.in { opacity: 1; }
+    @media (max-width: 760px) {
+      .nav-links a:nth-child(n+2) { display: none; }
+      .tagline, .product-sec { grid-template-columns: 1fr; }
+      .product-sec { min-height: auto; padding-top: 6rem; }
+      .num { top: 2rem; right: 0; transform: none; font-size: 14rem; }
+      .meta { grid-template-columns: 1fr; }
+      .spec-grid { grid-template-columns: repeat(4, minmax(150px, 1fr)); }
+      .collection-mini { grid-template-columns: 1fr 1fr; }
+      .room-system, .room-map { grid-template-columns: 1fr; }
+      .room-copy, .room-map { min-height: auto; }
+      .zone:nth-child(1) { grid-row: auto; min-height: 260px; }
+      .zone { min-height: 190px; }
+      footer { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <nav><a class="logo" href="#">BLOC</a><div class="nav-links"><a href="#p01">Products</a><a href="#specs">Specs</a><a href="#collection">Collection</a></div></nav>
+  <main>
+    <section class="hero-black">
+      <h1>BLOC</h1>
+      <div class="tagline"><p>家具は、狭い部屋の制約を自己表現に変える都市の道具である。</p><span class="scroll">Scroll</span></div>
+    </section>
+    <section class="room-system">
+      <div class="room-copy">
+        <div><p class="kicker">Room system</p><h2>ONE<br>ROOM,<br>FOUR<br>BLOCKS.</h2></div>
+        <p>BoConceptやArticleのような部屋別ブラウズを、BLOCではより硬く、番号制の都市生活システムとして再構成する。まず部屋の使い方を決め、次に製品番号と寸法で判断する。</p>
+      </div>
+      <div class="room-map" aria-label="BLOC room system map">
+        <a class="zone" href="#p01"><span>living / sleep</span><b>BASE</b></a>
+        <a class="zone" href="#p02"><span>storage / wall</span><b>GRID</b></a>
+        <a class="zone" href="#p03"><span>work / eat</span><b>EDGE</b></a>
+      </div>
+    </section>
+    <section class="product-sec dark" id="p01"><div class="num">01</div><div class="product-img reveal"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80" alt="Modular low sofa"></div><div class="product-copy reveal"><p class="kicker">Modular seat</p><h2>BASE<br>SOFA</h2><p>低い視線、硬い輪郭、自由な組み換え。都市のワンルームに余白を作るソファ。</p><div class="meta"><div><b>Material</b>Recycled fabric / steel frame</div><div><b>Size</b>W1820 D840 H620</div><div><b>Color</b>Charcoal / Bone</div><div><b>Price</b><span class="price">¥148,000</span></div></div><a href="#specs" class="btn">Compare Specs</a></div></section>
+    <section class="product-sec light" id="p02"><div class="num">02</div><div class="product-copy reveal"><p class="kicker">Compact storage</p><h2>GRID<br>SHELF</h2><p>見せる収納と隠す収納を一体化。壁を家具化する、都市生活者のためのストレージ。</p><div class="meta"><div><b>Material</b>Powder coated aluminum</div><div><b>Size</b>W960 D360 H1480</div><div><b>Color</b>White / Black</div><div><b>Price</b><span class="price">¥92,000</span></div></div><a href="#specs" class="btn">Compare Specs</a></div><div class="product-img reveal"><img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=1200&q=80" alt="Minimal urban shelving"></div></section>
+    <section class="product-sec dark" id="p03"><div class="num">03</div><div class="product-img reveal"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80" alt="Compact table in apartment"></div><div class="product-copy reveal"><p class="kicker">Work / eat / fold</p><h2>EDGE<br>TABLE</h2><p>仕事、食事、制作を一枚の面に集約する。折り畳めるが、仮設に見えないテーブル。</p><div class="meta"><div><b>Material</b>Oak veneer / black steel</div><div><b>Size</b>W1200 D700 H720</div><div><b>Color</b>Oak / Asphalt</div><div><b>Price</b><span class="price">¥76,000</span></div></div><a href="#specs" class="btn">Compare Specs</a></div></section>
+    <section class="section" id="specs"><p class="kicker">Specification table</p><h2>COMPARE<br>WITHOUT<br>NOISE</h2><div class="spec-grid reveal"><div class="cell head">Product</div><div class="cell head">Material</div><div class="cell head">Size</div><div class="cell head">Price</div><div class="cell">BASE SOFA</div><div class="cell">Recycled fabric</div><div class="cell">1820 / 840 / 620</div><div class="cell">¥148,000</div><div class="cell">GRID SHELF</div><div class="cell">Aluminum</div><div class="cell">960 / 360 / 1480</div><div class="cell">¥92,000</div><div class="cell">EDGE TABLE</div><div class="cell">Oak / steel</div><div class="cell">1200 / 700 / 720</div><div class="cell">¥76,000</div></div></section>
+    <section class="section" id="collection"><p class="kicker">Full collection</p><h2>FOUR<br>OBJECTS</h2><div class="collection-mini reveal"><div class="mini"><span>01</span><b>BASE SOFA</b><span>Seat</span></div><div class="mini"><span>02</span><b>GRID SHELF</b><span>Storage</span></div><div class="mini"><span>03</span><b>EDGE TABLE</b><span>Table</span></div><div class="mini"><span>04</span><b>BLOCK LAMP</b><span>Light</span></div></div></section>
+    <section class="cta-full"><p class="kicker">Urban furniture system</p><h2>BUILD<br>YOUR<br>ROOM.</h2><p>BLOCは架空の都市型家具ブランドです。実在の店舗・商品ではありません。</p><a class="btn" href="#p01">Back to Products</a></section>
+  </main>
+  <footer><span>© 2026 BLOC</span><span>Fictional design study</span></footer>
+  <script>
+    const io = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
