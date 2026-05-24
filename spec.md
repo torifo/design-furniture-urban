@@ -148,4 +148,5 @@ index.html
 - 製品セクション: `display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; align-items: center`
 - スペックテーブル: CSS Gridで `grid-template-columns: 2fr repeat(3, 1fr)`。`border-collapse` 相当をGrid gapで実現
 - CTAセクション: `min-height: 80svh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 3rem`
-- アクセントカラー `#E84C1B` は製品価格・CTA・hover時のみ使用。多用しない
+- アクセントカラー `#E84C1B` は **CTA hover時のみ** に限定。価格・kicker・scrollなど情報ラベルからは外す（FB-020: 価格がアクセント色だと「高さ」に注目が集中し製品自体への関心が下がるため）
+- 製品画像は **カラーのまま** 表示（旧版の `filter: grayscale(100%)` を撤廃）。モノクロームのフレームをベースに、家具そのものを唯一のカラー要素として浮かび上がらせる
